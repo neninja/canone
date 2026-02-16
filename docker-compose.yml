@@ -1,0 +1,28 @@
+version: "3.3"
+
+services:
+  jdk:
+    image: maven:3.9-eclipse-temurin-21
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      - maven-repo:/root/.m2
+    env_file:
+      - .env
+    command: [ "sh", "-lc", "sleep infinity" ]
+
+  postgres:
+    image: 'postgres:10'
+    ports:
+      - '${FORWARD_DB_PORT:-5432}:5432'
+    environment:
+      POSTGRES_DB: canone
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: secret
+
+volumes:
+  maven-repo: {}
+

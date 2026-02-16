@@ -1,0 +1,3 @@
+GET {{baseUrl}}/liveness
+
+# FIXME Pensar em como lidar com Security
